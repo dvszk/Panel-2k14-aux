@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SZK AUX</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#050505;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.bg{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#0f0f0f,#111,#1a1a1a);
+}
+
+.card{
+    position:relative;
+    width:340px;
+    padding:25px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 0 25px rgba(0,255,170,0.3);
+    z-index:10;
+    animation:fade 1s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.logo{
+    text-align:center;
+    font-size:32px;
+    color:#00ffaa;
+    font-weight:bold;
+    margin-bottom:25px;
+    text-shadow:0 0 15px #00ffaa;
+}
+
+.input{
+    width:100%;
+    padding:14px;
+    border:none;
+    outline:none;
+    border-radius:14px;
+    background:#111;
+    color:#fff;
+    margin-bottom:18px;
+    font-size:15px;
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:#00ffaa;
+    color:#000;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.03);
+    box-shadow:0 0 20px #00ffaa;
+}
+
+.panel{
+    display:none;
+    margin-top:20px;
+    animation:fade 0.5s ease;
+}
+
+.option{
+    background:#101010;
+    padding:14px;
+    border-radius:14px;
+    margin-bottom:12px;
+    color:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.switch{
+    width:45px;
+    height:24px;
+    background:#333;
+    border-radius:20px;
+    position:relative;
+    cursor:pointer;
+}
+
+.switch::before{
+    content:'';
+    position:absolute;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#fff;
+    top:3px;
+    left:3px;
+    transition:0.3s;
+}
+
+.switch.active{
+    background:#00ffaa;
+}
+
+.switch.active::before{
+    left:24px;
+}
+
+.inject{
+    margin-top:10px;
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:#00ffaa;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.status{
+    margin-top:15px;
+    text-align:center;
+    color:#00ffaa;
+    font-weight:bold;
+    min-height:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="card">
+
+<div class="logo">SZK AUX</div>
+
+<div id="login">
+<input type="password" id="key" class="input" placeholder="Digite sua Key">
+
+<button class="btn" onclick="entrar()">ENTRAR</button>
+</div>
+
+<div class="panel" id="panel">
+
+<div class="option">
+Controle Recuo
+<div class="switch" onclick="toggle(this)"></div>
+</div>
+
+<div class="option">
+Toque Suave
+<div class="switch" onclick="toggle(this)"></div>
+</div>
+
+<div class="option">
+Otimiza Toque
+<div class="switch" onclick="toggle(this)"></div>
+</div>
+
+<div class="option">
+Estabilizar Mira
+<div class="switch" onclick="toggle(this)"></div>
+</div>
+
+<button class="inject" onclick="injectar()">
+ATIVAR
+</button>
+
+<div class="status" id="status"></div>
+
+</div>
+
+</div>
+
+<script>
+
+function entrar(){
+
+    let key = document.getElementById("key").value;
+
+    if(key === "szkaux"){
+        document.getElementById("login").style.display = "none";
+        document.getElementById("panel").style.display = "block";
+    }else{
+        alert("Key inválida");
+    }
+}
+
+function toggle(el){
+    el.classList.toggle("active");
+}
+
+function injectar(){
+
+    let status = document.getElementById("status");
+
+    status.innerHTML = "Conectando...";
+
+    setTimeout(()=>{
+        status.innerHTML = "Ativado com sucesso";
+    },2500);
+
+}
+</script>
+
+</body>
+</html>
